@@ -107,7 +107,6 @@ const CreateGame = () => {
               <h3 className="w-full">Select Platforms</h3>
               <CheckBoxList
                 items={platforms}
-                registrar={register}
               />
             </div>
             <div className="flex justify-center flex-wrap w-full gap-3 divide-y my-2 border-black border-t p-3">

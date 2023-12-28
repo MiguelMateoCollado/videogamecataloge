@@ -13,7 +13,7 @@ const useViewGame = () => {
     const fetchData = async () => {
       if (gameId) {
         const response = await fetch(
-          `http://localhost:3001/videogames/${gameId}`
+          `http://vps-fc1975ee.vps.ovh.ca:8080/videogames/${gameId}`
         );
         const data = await response.json();
         return dispatch(setViewGame(data));

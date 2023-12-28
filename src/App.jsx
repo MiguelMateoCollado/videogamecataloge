@@ -23,7 +23,7 @@ function App() {
     );
 
   const getDBgames = () =>
-    fetch(`http://localhost:3001/videogames`).then((response) =>
+    fetch(`http://vps-fc1975ee.vps.ovh.ca:8080/videogames`).then((response) =>
       response.json()
     );
 

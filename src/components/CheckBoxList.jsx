@@ -1,7 +1,7 @@
 import { Checkbox, Card, List, Typography } from "@material-tailwind/react";
 import { Fragment } from "react";
 import useFormError from "../hooks/useFormError";
-const CheckBoxList = ({ items, registrar, }) => {
+const CheckBoxList = ({ items }) => {
   return (
     <Card className="w-full flex flex-wrap">
       <List className="flex flex-wrap flex-row">
@@ -18,7 +18,6 @@ const CheckBoxList = ({ items, registrar, }) => {
                   className="hover:before:opacity-0"
                   name={item.name}
                   value={item.name}
-                  {...registrar("platforms")}
                   containerProps={{
                     className: "p-0 px-2",
                   }}
