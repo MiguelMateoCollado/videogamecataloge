@@ -9,12 +9,11 @@ const useViewGame = () => {
   const view = useSelector((state) => state.games.gameView);
   const api_url = import.meta.env.VITE_API_URL;
   const api_key = import.meta.env.VITE_API_KEY;
+  const api_local = import.meta.env.VITE_API_LOCAL;
   useEffect(() => {
     const fetchData = async () => {
       if (gameId) {
-        const response = await fetch(
-          `http://vps-fc1975ee.vps.ovh.ca:8080/videogames/${gameId}`
-        );
+        const response = await fetch(`${api_local}/videogames/${gameId}`);
         const data = await response.json();
         return dispatch(setViewGame(data));
       } else {

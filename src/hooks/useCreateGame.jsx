@@ -13,11 +13,12 @@ const useCreateGame = () => {
   const [platforms, setPlatforms] = useState();
   const [genres, setGenres] = useState();
   async function getPlatforms() {
-    let data = await axios.get("http://vps-fc1975ee.vps.ovh.ca:8080/platforms");
+    const api_local = import.meta.env.VITE_API_LOCAL;
+    let data = await axios.get(`${api_local}/platforms`);
     setPlatforms(await data.data);
   }
   async function getGenres() {
-    let data = await axios.get("http://vps-fc1975ee.vps.ovh.ca:8080/generos");
+    let data = await axios.get(`${api_local}/generos`);
     setGenres(await data.data);
   }
 

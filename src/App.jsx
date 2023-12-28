@@ -12,20 +12,17 @@ import CardGame from "./components/CardGame";
 import { Pagination } from "./components/Pagination";
 function App() {
   const games = useSelector((state) => state.games);
-  console.log(games)
   const dispatch = useDispatch();
   const api_url = import.meta.env.VITE_API_URL;
   const api_key = import.meta.env.VITE_API_KEY;
-
+  const api_local = import.meta.env.VITE_API_LOCAL;
   const getGames = () =>
     fetch(`${api_url}games?${api_key}&page=1&page_size=40`).then((response) =>
       response.json()
     );
 
   const getDBgames = () =>
-    fetch(`http://vps-fc1975ee.vps.ovh.ca:8080/videogames`).then((response) =>
-      response.json()
-    );
+    fetch(`${api_local}/videogames`).then((response) => response.json());
 
   useEffect(() => {
     const fetchData = async () => {
