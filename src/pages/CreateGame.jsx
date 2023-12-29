@@ -8,8 +8,18 @@ import {
 import CheckBoxList from "../components/CheckBoxList";
 import useCreateGame from "../hooks/useCreateGame";
 const CreateGame = () => {
-  const { platforms, genres, register, handleSubmit, onSubmit, errors } =
-    useCreateGame();
+  const {
+    platforms,
+    genres,
+    getValues,
+    register,
+    handleSubmit,
+    onSubmit,
+    setError,
+    clearErrors,
+    errors,
+  } = useCreateGame();
+
   return (
     <div className="h-screen flex items-center">
       <Card className="bg-white p-5 flex justify-center  drop-shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none mx-auto max-w-screen-lg ">
@@ -107,12 +117,24 @@ const CreateGame = () => {
               <h3 className="w-full">Select Platforms</h3>
               <CheckBoxList
                 items={platforms}
+                func={register}
+                type={"platforms"}
+                setErrors={setError}
+                values={getValues()}
+                clear={clearErrors}
               />
             </div>
+
             <div className="flex justify-center flex-wrap w-full gap-3 divide-y my-2 border-black border-t p-3">
               <h3 className="w-full">Select Genres</h3>
-
-              <CheckBoxList items={genres} type={"genres"} />
+              <CheckBoxList
+                items={genres}
+                func={register}
+                type={"genres"}
+                setErrors={setError}
+                values={getValues()}
+                clear={clearErrors}
+              />
             </div>
           </div>
 

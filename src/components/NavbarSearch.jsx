@@ -15,7 +15,7 @@ export function NavbarSearch() {
   return (
     <Navbar className="mx-auto z-50 relative   max-w-screen-xl  my-5 border-4 border-gray-900  drop-shadow-lg shadow-red-900 rounded-none bg-white/100 py-3">
       <div className="flex flex-wrap gap-2 items-center justify-start md:flex-nowrap  text-blue-gray-900">
-        <img src={LogoSvg} className="w-full md:w-1/4" alt="" />
+        <img src={LogoSvg} className="w-full md:w-1/12" alt="" />
         <div className="flex md:w-2/4 w-full md:flex-nowrap gap-1 flex-wrap  justify-center">
           <div className="flex w-1/2 justify-center">
             <IconButton variant="text" className="text-red-900">
