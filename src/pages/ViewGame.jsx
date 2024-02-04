@@ -14,28 +14,30 @@ const ViewGame = () => {
 
   return (
     <div className="h-screen flex items-center p-3">
-      <Card className="w-full mx-auto max-w-[45rem]  shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none">
+      <Card className="w-full mx-auto max-w-[45rem]    shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none">
         <CardHeader
           floated={false}
           style={{
             backgroundSize: "cover",
+            height: "350px",
             backgroundPosition: "center",
             backgroundImage: `url("${view.background_image}")`,
+            backgroundRepeat: 'no-repeat',
           }}
           color="blue-gray"
           className=" border-black rounded-none border-4"
         >
-          <img src={`${view.background_image}`} alt="ui/ux review check" />
+          
           <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
         </CardHeader>
         <CardBody>
           <div className="mb-3 flex items-center justify-between">
-            <Typography variant="h3" color="blue-gray" className="font-lg">
+            <Typography  color="blue-gray" className="text-lg font-bold">
               {view.name}
             </Typography>
             <Typography
               color="blue-gray"
-              className="flex items-center gap-1.5 font-normal"
+              className="flex items-center  font-normal"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +54,7 @@ const ViewGame = () => {
               {view.rating}
             </Typography>
           </div>
-          <div className="divide-y gap-1">
+          <div className=" gap-1">
             <div className="text-left">
               <p
                 onClick={() => setRead(!read)}
@@ -64,10 +66,10 @@ const ViewGame = () => {
                 {view.description_raw}
               </p>
             </div>
-            <div className="flex flex-col justify-between mt-3 divide-y">
+            <div className="flex flex-col justify-between mt-3 ">
               <div className=" w-full flex  items-center my-auto gap-2 justify-start  flex-wrap">
-                <h3 className="p-2.5">Genres </h3>
-                <div className="gap-2 w-4/5 flex border-l-2">
+                <h3 className="">Genres </h3>
+                <div className="gap-2 w-4/5 flex">
                   {view.genres?.map((genre) => {
                     return (
                       <React.Fragment>
@@ -81,7 +83,7 @@ const ViewGame = () => {
               </div>
               <div className="w-full flex items-center my-auto gap-2 justify-start  flex-wrap ">
                 <h3 className="">Platforms</h3>
-                <div className="gap-2 flex w-4/5 flex-wrap border-l-2">
+                <div className="gap-2 flex w-4/5 flex-wrap ">
                   {view.platforms?.map((platform) => {
                     return (
                       <React.Fragment>
@@ -98,7 +100,7 @@ const ViewGame = () => {
         </CardBody>
         <CardFooter className="pt-3 flex justify-center ">
           <Link
-            className=" flex bg-red-600  text-white py-3 gap-2 w-1/2 justify-center border-2 border-black hover:shadow-inner hover:shadow-[#5C0500]/90 shadow-red-900 rounded-none hover: shadow-inner"
+            className=" flex bg-red-600  text-white py-3 gap-2 w-full justify-center border-2 border-black hover:shadow-inner hover:shadow-[#5C0500]/90 shadow-red-900 rounded-none hover: shadow-inner"
             to={`${view.website}`}
           >
             Visit website <ArrowTopRightOnSquareIcon className="w-5" />
