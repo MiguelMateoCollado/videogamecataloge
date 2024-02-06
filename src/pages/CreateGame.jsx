@@ -8,7 +8,6 @@ import {
 import useCreateGame from "../hooks/useCreateGame";
 import Select from "react-select";
 import { Controller } from "react-hook-form";
-import { useEffect } from "react";
 
 const CreateGame = () => {
   const {
