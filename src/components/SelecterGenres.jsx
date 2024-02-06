@@ -4,7 +4,7 @@ const SelecterGenres = () => {
   const { handleSelect, genres } = useSelectGenres();
 
   return (
-    <div className="md:w-3/4 w-full z-auto">
+    <div className="md:w-2/4 w-full z-auto">
       <Select onChange={handleSelect} label="Select Version" className="">
         {genres.genres.map((genre) => {
           return (

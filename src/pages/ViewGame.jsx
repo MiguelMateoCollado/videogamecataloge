@@ -19,20 +19,19 @@ const ViewGame = () => {
           floated={false}
           style={{
             backgroundSize: "cover",
-            height: "350px",
+            height: "15rem",
             backgroundPosition: "center",
             backgroundImage: `url("${view.background_image}")`,
-            backgroundRepeat: 'no-repeat',
+            backgroundRepeat: "no-repeat",
           }}
           color="blue-gray"
           className=" border-black rounded-none border-4"
         >
-          
           <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
         </CardHeader>
         <CardBody>
           <div className="mb-3 flex items-center justify-between">
-            <Typography  color="blue-gray" className="text-lg font-bold">
+            <Typography color="blue-gray" className="text-lg font-bold">
               {view.name}
             </Typography>
             <Typography
@@ -57,7 +56,6 @@ const ViewGame = () => {
           <div className=" gap-1">
             <div className="text-left">
               <p
-                onClick={() => setRead(!read)}
                 className={`text-sm font-body ${
                   read === true ? "line-clamp-5" : "line-clamp-none"
                 } leading-relaxed`}
@@ -65,6 +63,12 @@ const ViewGame = () => {
                 {view.description}
                 {view.description_raw}
               </p>
+              <button
+                className="  bg-red-600  text-white p-1 text-sm transition-all duration-150 ease-in-out gap-2 justify-center border-2 border-black hover:shadow-inner hover:shadow-[#5C0500]/90 shadow-red-900 rounded-none hover: shadow-inner"
+                onClick={() => setRead(!read)}
+              >
+                {read ? "Read more" : "Read less"}
+              </button>
             </div>
             <div className="flex flex-col justify-between mt-3 ">
               <div className=" w-full flex  items-center my-auto gap-2 justify-start  flex-wrap">
