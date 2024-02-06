@@ -6,7 +6,7 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import useCreateGame from "../hooks/useCreateGame";
-import Select from "react-select";
+import Select from "react-select"
 import { Controller } from "react-hook-form";
 
 const CreateGame = () => {
