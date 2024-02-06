@@ -76,7 +76,7 @@ const ViewGame = () => {
                 <div className="gap-2 w-4/5 flex">
                   {view.genres?.map((genre) => {
                     return (
-                      <React.Fragment>
+                      <React.Fragment key={genre.id}>
                         <span className="p-2 text-sm text-red-900">
                           {genre.name}
                         </span>
@@ -90,7 +90,7 @@ const ViewGame = () => {
                 <div className="gap-2 flex w-4/5 flex-wrap ">
                   {view.platforms?.map((platform) => {
                     return (
-                      <React.Fragment>
+                      <React.Fragment key={platform.id}>
                         <span className="p-2 text-sm text-gray-800">
                           {platform?.platform?.name || platform?.name}
                         </span>

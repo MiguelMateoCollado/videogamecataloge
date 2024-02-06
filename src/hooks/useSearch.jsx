@@ -19,13 +19,14 @@ const useSearch = () => {
   //constantes
   const fetchData = (gameSearch, currentPage) => {
     fetch(
-      `${api_url}games?${api_key}&search=${gameSearch}&page=${currentPage}&page_size=39`
+      `${api_url}games?${api_key}&search=${gameSearch}&search_exact="true"&page=${currentPage}&page_size=39`
     )
       .then((response) => response.json())
       .then((json) => {
         dispatch(setTotalGames(json.count));
         dispatch(agregarGames(json.results));
-      });
+      })
+      .catch((response) => console.error(response));
   };
 
   const handleSubmit = (e) => {
@@ -60,7 +61,7 @@ const useSearch = () => {
     handleSubmit,
     inputRef,
     rollBackSearch,
-    setCurrentPage
+    setCurrentPage,
   };
 };
 export default useSearch;

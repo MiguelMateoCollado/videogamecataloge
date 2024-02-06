@@ -11,6 +11,7 @@ const useCreateGame = () => {
     handleSubmit,
     getValues,
     setError,
+    control,
     clearErrors,
     formState: { errors },
   } = useForm();
@@ -19,16 +20,33 @@ const useCreateGame = () => {
   const [genres, setGenres] = useState();
   async function getPlatforms() {
     let data = await axios.get(`${api_local}/platforms`);
-    setPlatforms(await data.data);
+    let formated = [];
+    data.data.forEach((element) => {
+      const object = {
+        value: element.name,
+        label: element.name.toLowerCase(),
+        id: element.id,
+      };
+      formated.push(object);
+    });
+    setPlatforms(formated);
   }
   async function getGenres() {
     let data = await axios.get(`${api_local}/generos`);
-    setGenres(await data.data);
+    let formated = [];
+    data.data.forEach((element) => {
+      const object = {
+        value: element.name,
+        label: element.name.toLowerCase(),
+        id: element.id,
+      };
+      formated.push(object);
+    });
+    setGenres(formated);
   }
 
   const onSubmit = (data) =>
     axios.post(`${api_local}/create`, data).then(() => navigate("/"));
-
   useEffect(() => {
     getPlatforms();
     getGenres();
@@ -42,6 +60,7 @@ const useCreateGame = () => {
     setError,
     errors,
     genres,
+    control,
     onSubmit,
   };
 };

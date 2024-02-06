@@ -5,8 +5,11 @@ import {
   Typography,
   Textarea,
 } from "@material-tailwind/react";
-import CheckBoxList from "../components/CheckBoxList";
 import useCreateGame from "../hooks/useCreateGame";
+import Select from "react-select";
+import { Controller } from "react-hook-form";
+import { useEffect } from "react";
+
 const CreateGame = () => {
   const {
     platforms,
@@ -15,14 +18,15 @@ const CreateGame = () => {
     register,
     handleSubmit,
     onSubmit,
+    control,
     setError,
     clearErrors,
     errors,
   } = useCreateGame();
-
+  console.log(getValues())
   return (
-    <div className="h-screen flex items-center">
-      <Card className="bg-white p-5 flex justify-center  drop-shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none mx-auto max-w-screen-lg ">
+    <div className="min-h-screen flex items-center">
+      <Card className="bg-white  p-5  flex justify-center  drop-shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none mx-auto max-w-screen-lg ">
         <Typography variant="h4" color="blue-gray">
           Create a new videogame
         </Typography>
@@ -113,6 +117,39 @@ const CreateGame = () => {
                 )}
               </div>
             </div>
+            <Controller
+              control={control}
+              name="genres"
+              render={({ field: { onChange,name, ref } }) => (
+                <Select
+                  isMulti
+                  closeMenuOnSelect={false}
+                  onChange={(e) => onChange(e)}
+                  name={name}
+                  options={genres}
+                  ref={ref}
+                  className="w-1/2"
+                />
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="platforms"
+              render={({ field: { onChange, name, ref } }) => (
+                <Select
+                  isMulti
+                  closeMenuOnSelect={false}
+                  onChange={(e) => onChange(e)}
+                  name={name}
+                  options={platforms}
+                  ref={ref}
+                  className="w-1/2"
+                />
+              )}
+            />
+
+            {/*
             <div className="flex justify-center flex-wrap w-full gap-3 divide-y my-2 border-black border-t p-3">
               <h3 className="w-full">Select Platforms</h3>
               <CheckBoxList
@@ -124,8 +161,10 @@ const CreateGame = () => {
                 clear={clearErrors}
               />
             </div>
+            */}
 
-            <div className="flex justify-center flex-wrap w-full gap-3 divide-y my-2 border-black border-t p-3">
+            {/*
+                     <div className="flex justify-center flex-wrap w-full gap-3 divide-y my-2 border-black border-t p-3">
               <h3 className="w-full">Select Genres</h3>
               <CheckBoxList
                 items={genres}
@@ -136,6 +175,7 @@ const CreateGame = () => {
                 clear={clearErrors}
               />
             </div>
+              */}
           </div>
 
           <Button

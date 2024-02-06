@@ -37,9 +37,9 @@ function App() {
 
   return (
     <div>
-      <div className="flex flex-wrap justify-center z-0 min-h-screen gap-8 ">
+      <div className="flex flex-wrap justify-center z-0 min-h-screen gap-8">
         {games.seeGamesDB === false && games.games.length === 0 ? (
-          <Spinner className="h-12 w-12" />
+          <Spinner className="h-[5rem] w-[5rem]" />
         ) : games.seeGamesDB === true ? (
           games.dbGames?.map((dbGame) => {
             return (
