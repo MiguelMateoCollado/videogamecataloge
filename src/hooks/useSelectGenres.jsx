@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setGenres } from "../store/reducers/genresSlice";
 import { useEffect } from "react";
-import { setCurrentPage, setTotalGames, agregarGames } from "../store/reducers/gamesSlice";
+import {
+  setCurrentPage,
+  setTotalGames,
+  agregarGames,
+} from "../store/reducers/gamesSlice";
 import { setUseGenres } from "../store/reducers/genresSlice";
 const useSelectGenres = () => {
   const api_url = import.meta.env.VITE_API_URL;
@@ -14,7 +18,16 @@ const useSelectGenres = () => {
     const fetchData = async () => {
       const response = await fetch(`${api_url}genres?${api_key}`);
       const data = await response.json();
-      dispatch(setGenres(data.results));
+      let formated = [];
+      data.results.forEach((element) => {
+        const object = {
+          value: element.slug,
+          label: element.name,
+          id: element.id,
+        };
+        formated.push(object);
+      });
+      dispatch(setGenres(formated));
     };
     fetchData();
   }, []);

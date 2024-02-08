@@ -16,6 +16,7 @@ function App() {
   const api_url = import.meta.env.VITE_API_URL;
   const api_key = import.meta.env.VITE_API_KEY;
   const api_local = import.meta.env.VITE_API_LOCAL;
+
   const getGames = () =>
     fetch(`${api_url}games?${api_key}&page=1&page_size=40`).then((response) =>
       response.json()

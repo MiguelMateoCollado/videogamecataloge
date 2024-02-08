@@ -6,7 +6,7 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import useCreateGame from "../hooks/useCreateGame";
-import Select from "react-select"
+import Select from "react-select";
 import { Controller } from "react-hook-form";
 
 const CreateGame = () => {
@@ -22,10 +22,10 @@ const CreateGame = () => {
     clearErrors,
     errors,
   } = useCreateGame();
-  console.log(getValues())
+  console.log(errors);
   return (
     <div className="min-h-screen flex items-center">
-      <Card className="bg-white  p-5  flex justify-center  drop-shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none mx-auto max-w-screen-lg ">
+      <Card className="bg-white  p-5  flex justify-center  drop-shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none mx-auto  ">
         <Typography variant="h4" color="blue-gray">
           Create a new videogame
         </Typography>
@@ -37,7 +37,7 @@ const CreateGame = () => {
           className="mt-8 mb-2 w-auto max-w-screen-lg mx-auto sm:w-auto"
         >
           <div className="mb-4 flex flex-wrap gap-6">
-            <div className="flex w-full gap-3">
+            <div className="flex w-full gap-3 flex-wrap">
               <div className="flex flex-wrap w-full">
                 <Input
                   className="w-1/4"
@@ -48,10 +48,15 @@ const CreateGame = () => {
                     minLength: 3,
                   })}
                 />
+                {errors.name?.type === "required" && (
+                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                    Se requiere el nombre
+                  </span>
+                )}
                 {errors.name?.type === "minLength" && (
-                  <p className="text-red-900 font-bold">
-                    Debe tener mas de 3 digitos
-                  </p>
+                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                    Debe tener minimo 3 caracteres
+                  </span>
                 )}
               </div>
               <div className="flex flex-wrap w-full">
@@ -64,8 +69,15 @@ const CreateGame = () => {
                     minLength: 50,
                   })}
                 />
+                {errors.description?.type === "required" && (
+                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                    Se requiere un descripcion
+                  </span>
+                )}
                 {errors.description?.type === "minLength" && (
-                  <p className="text-red-900 font-bold">Debe ser mas larga!</p>
+                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                    debe ser mas larga minimo 50 caracteres
+                  </span>
                 )}
               </div>
             </div>
@@ -79,8 +91,15 @@ const CreateGame = () => {
                   pattern: /^(ftp|http|https):\/\/[^ "]+$/,
                 })}
               />
+              {errors.background_image?.type === "required" && (
+                <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                  debe ingresar una imagen
+                </span>
+              )}
               {errors.background_image?.type === "pattern" && (
-                <p className="text-red-900 font-bold">Ingresa una url valida</p>
+                <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                  debe ser una url valida
+                </span>
               )}
             </div>
             <div className="flex w-full gap-3">
@@ -93,10 +112,18 @@ const CreateGame = () => {
                   {...register("rating", {
                     required: true,
                     min: 1,
+                    max: 5,
                   })}
                 />
-                {errors.rating?.type === "min" && (
-                  <p className="text-red-900 font-bold">Debe ser mayor a 0!</p>
+                {errors.rating?.type === "minLength" && (
+                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                    debe ser mayor a 0
+                  </span>
+                )}
+                {errors.rating?.type === "max" && (
+                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                    debe ser menor a 5
+                  </span>
                 )}
               </div>
               <div className="flex flex-wrap w-full">
@@ -109,44 +136,52 @@ const CreateGame = () => {
                     pattern: /^(ftp|http|https):\/\/[^ "]+$/,
                   })}
                 />
+                {errors.website?.type === "required" && (
+                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                    debe ingresar una url
+                  </span>
+                )}
                 {errors.website?.type === "pattern" && (
-                  <p className="text-red-900 font-bold">
-                    Ingresa una url valida
-                  </p>
+                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                    debe ser una url valida
+                  </span>
                 )}
               </div>
             </div>
-            <Controller
-              control={control}
-              name="genres"
-              render={({ field: { onChange,name, ref } }) => (
-                <Select
-                  isMulti
-                  closeMenuOnSelect={false}
-                  onChange={(e) => onChange(e)}
-                  name={name}
-                  options={genres}
-                  ref={ref}
-                  className="w-1/2"
-                />
-              )}
-            />
+            <div className="flex w-full gap-3 sm:flex-wrap  flex-wrap">
+              <Controller
+                control={control}
+                name="genres"
+                rules={{ required: true, minLength: 3 }}
+                render={({ field: { onChange, name, ref } }) => (
+                  <Select
+                    isMulti
+                    closeMenuOnSelect={false}
+                    onChange={(e) => onChange(e)}
+                    name={name}
+                    options={genres}
+                    ref={ref}
+                    className="w-full"
+                  />
+                )}
+              />
 
-            <Controller
-              control={control}
-              name="platforms"
-              render={({ field: { onChange, name, ref } }) => (
-                <Select
-                  isMulti
-                  closeMenuOnSelect={false}
-                  onChange={(e) => onChange(e)}
-                  name={name}
-                  options={platforms}
-                  ref={ref}
-                  className="w-1/2"
-                />
-              )}
-            />
+              <Controller
+                control={control}
+                name="platforms"
+                render={({ field: { onChange, name, ref } }) => (
+                  <Select
+                    isMulti
+                    closeMenuOnSelect={false}
+                    onChange={(e) => onChange(e)}
+                    name={name}
+                    options={platforms}
+                    ref={ref}
+                    className="w-full"
+                  />
+                )}
+              />
+            </div>
 
             {/*
             <div className="flex justify-center flex-wrap w-full gap-3 divide-y my-2 border-black border-t p-3">

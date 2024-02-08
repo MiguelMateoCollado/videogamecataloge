@@ -1,19 +1,15 @@
-import { Select, Option } from "@material-tailwind/react";
+import Select from "react-select";
 import useSelectGenres from "../hooks/useSelectGenres";
 const SelecterGenres = () => {
   const { handleSelect, genres } = useSelectGenres();
 
   return (
     <div className="md:w-2/4 w-full z-auto">
-      <Select onChange={handleSelect} label="Select Version" className="">
-        {genres.genres.map((genre) => {
-          return (
-            <Option key={genre.id} value={genre.slug}>
-              {genre.name}
-            </Option>
-          );
-        })}
-      </Select>
+      <Select
+        options={genres.genres}
+        onChange={(e) => handleSelect(e.value)}
+        label="Select Version"
+      ></Select>
     </div>
   );
 };
