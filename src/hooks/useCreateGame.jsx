@@ -13,6 +13,7 @@ const useCreateGame = () => {
     setError,
     control,
     clearErrors,
+    watch,
     formState: { errors },
   } = useForm();
   const api_local = import.meta.env.VITE_API_LOCAL;
@@ -24,7 +25,7 @@ const useCreateGame = () => {
     data.data.forEach((element) => {
       const object = {
         value: element.name,
-        label: element.name.toLowerCase(),
+        label: element.name,
         id: element.id,
       };
       formated.push(object);
@@ -37,7 +38,7 @@ const useCreateGame = () => {
     data.data.forEach((element) => {
       const object = {
         value: element.name,
-        label: element.name.toLowerCase(),
+        label: element.name,
         id: element.id,
       };
       formated.push(object);
@@ -62,6 +63,7 @@ const useCreateGame = () => {
     genres,
     control,
     onSubmit,
+    watch
   };
 };
 

@@ -63,12 +63,15 @@ const ViewGame = () => {
                 {view.description}
                 {view.description_raw}
               </p>
-              <button
-                className="  bg-red-600  text-white p-1 text-sm transition-all duration-150 ease-in-out gap-2 justify-center border-2 border-black hover:shadow-inner hover:shadow-[#5C0500]/90 shadow-red-900 rounded-none hover: shadow-inner"
-                onClick={() => setRead(!read)}
-              >
-                {read ? "Read more" : "Read less"}
-              </button>
+              {(view.description?.length > 500 ||
+                view.description_raw?.length > 500) && (
+                <button
+                  className="  bg-red-600  text-white p-1 text-sm transition-all duration-150 ease-in-out gap-2 justify-center border-2 border-black hover:shadow-inner hover:shadow-[#5C0500]/90 shadow-red-900 rounded-none hover: shadow-inner"
+                  onClick={() => setRead(!read)}
+                >
+                  {read ? "Read more" : "Read less"}
+                </button>
+              )}
             </div>
             <div className="flex flex-col justify-between mt-3 ">
               <div className=" w-full flex  items-center my-auto gap-2 justify-start  flex-wrap">

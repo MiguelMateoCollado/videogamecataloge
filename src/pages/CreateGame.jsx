@@ -18,11 +18,10 @@ const CreateGame = () => {
     handleSubmit,
     onSubmit,
     control,
-    setError,
-    clearErrors,
+    watch,
     errors,
   } = useCreateGame();
-  console.log(errors);
+  console.log(getValues());
   return (
     <div className="min-h-screen flex items-center">
       <Card className="bg-white  p-5  flex justify-center  drop-shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none mx-auto  ">
@@ -44,18 +43,19 @@ const CreateGame = () => {
                   label="Name"
                   name="name"
                   {...register("name", {
-                    required: true,
-                    minLength: 3,
+                    required: {
+                      value: true,
+                      message: "El nombre es obligatorio",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "Debe tener minimo 3 caracteres",
+                    },
                   })}
                 />
-                {errors.name?.type === "required" && (
+                {errors.name?.message && (
                   <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                    Se requiere el nombre
-                  </span>
-                )}
-                {errors.name?.type === "minLength" && (
-                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                    Debe tener minimo 3 caracteres
+                    {errors.name.message}
                   </span>
                 )}
               </div>
@@ -65,18 +65,19 @@ const CreateGame = () => {
                   label="Description"
                   name="description"
                   {...register("description", {
-                    required: true,
-                    minLength: 50,
+                    required: {
+                      value: true,
+                      message: "Se requiere una descripcion del juego",
+                    },
+                    minLength: {
+                      value: 30,
+                      message: "Debe tener almenos 30 caracteres",
+                    },
                   })}
                 />
-                {errors.description?.type === "required" && (
+                {errors.description?.message && (
                   <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                    Se requiere un descripcion
-                  </span>
-                )}
-                {errors.description?.type === "minLength" && (
-                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                    debe ser mas larga minimo 50 caracteres
+                    {errors.description.message}
                   </span>
                 )}
               </div>
@@ -87,18 +88,19 @@ const CreateGame = () => {
                 label="image url"
                 name="background_image"
                 {...register("background_image", {
-                  required: true,
-                  pattern: /^(ftp|http|https):\/\/[^ "]+$/,
+                  required: {
+                    value: true,
+                    message: "Se requiere una URL de imagen",
+                  },
+                  pattern: {
+                    value: /\.([0-9a-z]+)(?:[\?#]|$)/i,
+                    message: "La url debe ser valida",
+                  },
                 })}
               />
-              {errors.background_image?.type === "required" && (
+              {errors.background_image?.message && (
                 <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                  debe ingresar una imagen
-                </span>
-              )}
-              {errors.background_image?.type === "pattern" && (
-                <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                  debe ser una url valida
+                  {errors.background_image.message}
                 </span>
               )}
             </div>
@@ -110,19 +112,14 @@ const CreateGame = () => {
                   name="rating"
                   {...register("rating")}
                   {...register("rating", {
-                    required: true,
-                    min: 1,
-                    max: 5,
+                    required: { value: true, message: "Califica el juego" },
+                    min: { value: 1, message: "El valor minimo es 1" },
+                    max: { value: 5, message: "El valor maximo es 5" },
                   })}
                 />
-                {errors.rating?.type === "minLength" && (
+                {errors.rating?.message && (
                   <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                    debe ser mayor a 0
-                  </span>
-                )}
-                {errors.rating?.type === "max" && (
-                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                    debe ser menor a 5
+                    {errors.rating.message}
                   </span>
                 )}
               </div>
@@ -132,18 +129,19 @@ const CreateGame = () => {
                   label="web url"
                   name="website"
                   {...register("website", {
-                    required: true,
-                    pattern: /^(ftp|http|https):\/\/[^ "]+$/,
+                    required: {
+                      value: true,
+                      message: "Debe ser una url valida",
+                    },
+                    pattern: {
+                      value: /^(ftp|http|https):\/\/[^ "]+$/,
+                      message: "Debe ingresar una Url valida",
+                    },
                   })}
                 />
-                {errors.website?.type === "required" && (
+                {errors.website?.message && (
                   <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                    debe ingresar una url
-                  </span>
-                )}
-                {errors.website?.type === "pattern" && (
-                  <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
-                    debe ser una url valida
+                    {errors.website.message}
                   </span>
                 )}
               </div>
@@ -152,7 +150,14 @@ const CreateGame = () => {
               <Controller
                 control={control}
                 name="genres"
-                rules={{ required: true, minLength: 3 }}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Debe seleccionar almenos 1 categoria",
+                  },
+                  validate: (value) =>
+                    value.length < 5 || "Debe tener menos de 5 categorias",
+                }}
                 render={({ field: { onChange, name, ref } }) => (
                   <Select
                     isMulti
@@ -165,10 +170,22 @@ const CreateGame = () => {
                   />
                 )}
               />
-
+              {errors.genres?.message && (
+                <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                  {errors.genres.message}
+                </span>
+              )}
               <Controller
                 control={control}
                 name="platforms"
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Debe seleccionar al menos 1 plataforma",
+                  },
+                  validate: (value) =>
+                    value.length < 5 || "Debe tener menos de 5 plataformas",
+                }}
                 render={({ field: { onChange, name, ref } }) => (
                   <Select
                     isMulti
@@ -181,35 +198,12 @@ const CreateGame = () => {
                   />
                 )}
               />
+              {errors.platforms?.message && (
+                <span className="p-2 text-xs tracking-wider mt-2 text-gray-700 rounded-lg bg-red-500">
+                  {errors.platforms.message}
+                </span>
+              )}
             </div>
-
-            {/*
-            <div className="flex justify-center flex-wrap w-full gap-3 divide-y my-2 border-black border-t p-3">
-              <h3 className="w-full">Select Platforms</h3>
-              <CheckBoxList
-                items={platforms}
-                func={register}
-                type={"platforms"}
-                setErrors={setError}
-                values={getValues()}
-                clear={clearErrors}
-              />
-            </div>
-            */}
-
-            {/*
-                     <div className="flex justify-center flex-wrap w-full gap-3 divide-y my-2 border-black border-t p-3">
-              <h3 className="w-full">Select Genres</h3>
-              <CheckBoxList
-                items={genres}
-                func={register}
-                type={"genres"}
-                setErrors={setError}
-                values={getValues()}
-                clear={clearErrors}
-              />
-            </div>
-              */}
           </div>
 
           <Button
