@@ -18,12 +18,14 @@ function App() {
   const api_local = import.meta.env.VITE_API_LOCAL;
 
   const getGames = () =>
-    fetch(`${api_url}games?${api_key}&page=1&page_size=40`).then((response) =>
-      response.json()
-    );
+    fetch(`${api_url}games?${api_key}&page=1&page_size=40`)
+      .then((response) => response.json())
+      .catch((error) => console.log(error));
 
   const getDBgames = () =>
-    fetch(`${api_local}/videogames`).then((response) => response.json());
+    fetch(`${api_local}/videogames`)
+      .then((response) => response.json())
+      .catch((error) => console.log(error));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,9 +44,9 @@ function App() {
         {games.seeGamesDB === false && games.games.length === 0 ? (
           <Spinner className="h-[5rem] w-[5rem]" />
         ) : games.seeGamesDB === true ? (
-          games.dbGames?.map((dbGame) => {
+          games.dbGames?.map((dbGame, index) => {
             return (
-              <React.Fragment>
+              <React.Fragment key={index}>
                 <CardGame
                   genres={dbGame.genres}
                   img={dbGame.background_image}
@@ -59,7 +61,7 @@ function App() {
         ) : (
           games.games?.map((game) => {
             return (
-              <React.Fragment>
+              <React.Fragment key={game.id}>
                 <CardGame
                   genres={game.genres}
                   img={game.background_image}

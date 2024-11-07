@@ -14,12 +14,12 @@ const ViewGame = () => {
 
   return (
     <div className="h-screen flex items-center p-3">
-      <Card className="w-full mx-auto max-w-[45rem]    shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none">
+      <Card className="w-full mx-auto max-w-[35rem]    shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none">
         <CardHeader
           floated={false}
           style={{
             backgroundSize: "cover",
-            height: "15rem",
+            height: "25rem",
             backgroundPosition: "center",
             backgroundImage: `url("${view.background_image}")`,
             backgroundRepeat: "no-repeat",
@@ -54,24 +54,7 @@ const ViewGame = () => {
             </Typography>
           </div>
           <div className=" gap-1">
-            <div className="text-left">
-              <p
-                className={`text-sm font-body ${
-                  read === true ? "line-clamp-5" : "line-clamp-none"
-                } leading-relaxed`}
-              >
-                {view.description}
-                {view.description_raw}
-              </p>
-              {(view.description?.length > 500 ||
-                view.description_raw?.length > 500) && (
-                <button
-                  className="  bg-red-600  text-white p-1 text-sm transition-all duration-150 ease-in-out gap-2 justify-center border-2 border-black hover:shadow-inner hover:shadow-[#5C0500]/90 shadow-red-900 rounded-none hover: shadow-inner"
-                  onClick={() => setRead(!read)}
-                >
-                  {read ? "Read more" : "Read less"}
-                </button>
-              )}
+            <div className="text-left  overflow-scroll h-40 scroll-m-3 text-sm tracking-wide space-y-2 scrollbar-thin overflow-x-hidden" dangerouslySetInnerHTML={{ __html: view.description }}>
             </div>
             <div className="flex flex-col justify-between mt-3 ">
               <div className=" w-full flex  items-center my-auto gap-2 justify-start  flex-wrap">

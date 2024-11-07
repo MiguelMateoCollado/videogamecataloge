@@ -4,3 +4,20 @@
 body{
     background: #b22424;
 }
+.scrollbar-thin::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #b22424; /* Color del "pulgar" (parte que se mueve) */
+    border-radius: 10px; /* Radio de borde del pulgar */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color del fondo de la pista */
+    border-radius: 10px; /* Radio de borde de la pista */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-button {
+    display: none; /* Oculta los botones de la barra */
+  }

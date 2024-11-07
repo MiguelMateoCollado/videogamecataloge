@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const useCreateGame = () => {
@@ -20,9 +19,11 @@ const useCreateGame = () => {
   const [platforms, setPlatforms] = useState();
   const [genres, setGenres] = useState();
   async function getPlatforms() {
-    let data = await axios.get(`${api_local}/platforms`);
+    let data = await axios.get(`${api_local}/platforms`).catch((error) => {
+      console.log(error);
+    });
     let formated = [];
-    data.data.forEach((element) => {
+    await data.data.forEach((element) => {
       const object = {
         value: element.name,
         label: element.name,
@@ -63,7 +64,7 @@ const useCreateGame = () => {
     genres,
     control,
     onSubmit,
-    watch
+    watch,
   };
 };
 

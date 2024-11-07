@@ -18,7 +18,6 @@ const CreateGame = () => {
     handleSubmit,
     onSubmit,
     control,
-    watch,
     errors,
   } = useCreateGame();
   console.log(getValues());
