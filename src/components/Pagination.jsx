@@ -41,12 +41,12 @@ export function Pagination() {
       </IconButton>
     );
   }
-  console.log(currentPage - 1 )
+
   return (
     <ButtonGroup
       variant="outlined"
       color="blue-gray"
-      className="flex justify-center p-8 "
+      className="flex justify-center p-8 px-0 "
     >
       <IconButton
         onClick={prev}

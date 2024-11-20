@@ -10,10 +10,10 @@ import {
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import useViewGame from "../hooks/useViewGame";
 const ViewGame = () => {
-  const { read, setRead, view } = useViewGame();
+  const { view } = useViewGame();
 
   return (
-    <div className="h-screen flex items-center p-3">
+    <div className="min-h-screen flex items-center p-3">
       <Card className="w-full mx-auto max-w-[35rem]    shadow-lg shadow-red-900 rounded-none border-4 border-gray-900  filter-none">
         <CardHeader
           floated={false}
@@ -54,8 +54,10 @@ const ViewGame = () => {
             </Typography>
           </div>
           <div className=" gap-1">
-            <div className="text-left  overflow-scroll h-40 scroll-m-3 text-sm tracking-wide space-y-2 scrollbar-thin overflow-x-hidden" dangerouslySetInnerHTML={{ __html: view.description }}>
-            </div>
+            <div
+              className="text-left  overflow-scroll h-40 scroll-m-3 text-sm tracking-wide space-y-2 scrollbar-thin overflow-x-hidden"
+              dangerouslySetInnerHTML={{ __html: view.description }}
+            ></div>
             <div className="flex flex-col justify-between mt-3 ">
               <div className=" w-full flex  items-center my-auto gap-2 justify-start  flex-wrap">
                 <h3 className="">Genres </h3>

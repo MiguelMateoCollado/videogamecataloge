@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { agregarGames, setTotalGames } from "../store/reducers/gamesSlice";
-import React, { useState } from "react";
+import { useState } from "react";
 const usePagination = () => {
   const dispatch = useDispatch();
   const games = useSelector((state) => state.games);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(40);
-  const [pageNumberLimit, setPageNumberLimit] = useState(10);
+  const [itemsPerPage] = useState(40);
+  const [pageNumberLimit] = useState(10);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(10);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(1);
 
