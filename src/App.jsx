@@ -40,9 +40,15 @@ function App() {
 
   return (
     <div>
-      <div className="flex flex-wrap justify-center z-0 min-h-screen items-start gap-8">
+      <div
+        className={`flex flex-wrap justify-center z-0 min-h-screen ${
+          games.seeGamesDB === false && games.games.length === 0
+            ? "items-center"
+            : "items-start"
+        } gap-8`}
+      >
         {games.seeGamesDB === false && games.games.length === 0 ? (
-          <Spinner className="h-[5rem] w-[5rem]" />
+          <Spinner className="h-[5rem] w-[5rem]" color="red" />
         ) : games.seeGamesDB === true ? (
           games.dbGames?.map((dbGame, index) => {
             return (
